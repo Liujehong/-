@@ -1,1 +1,484 @@
-开发中..
+#include <stdio.h>
+#include <stdlib.h>
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+int main(int argc, char *argv[]) {
+	guanliyuanjiemian();
+	return 0;
+}
+//void adread()//管理员 
+//{	
+//	float schinese;
+//	float smath;
+//	float senglish;
+//	char stuname[20];
+// 	char stuid[20];
+// 	char stuchinese[20];
+// 	char stumath[20];
+// 	char stuenglish[20];
+// 	int flag;//判断是否使用平均分的变量 
+// 	float sum=0;
+// 	float avg;
+// 
+// 	system("cls");
+// 	FILE *fp;
+//	if((fp=fopen("score.txt","r"))==NULL)
+//	{
+//	 	printf("打开错误！"); 
+//	 	system("pause");
+//	 	exit(0);
+//	}   
+//	//格式化输出
+//	printf("%-10s%-15s%-10s%-10s%-10s%-15s%-13s\n\n","姓名","学号","语文","数学","英语","总分","平均分");  
+//
+//		  
+//		while(fscanf(fp,"%s %s %s %s %s\n\n",stuname,stuid,stuchinese,stumath,stuenglish)!=EOF)
+//		{	schinese=atof(stuchinese);
+//			smath=atof(stumath);
+//			senglish=atof(stuenglish);
+//			sum = schinese + smath+senglish;
+//			avg = sum/3;
+//			printf("%-10s%-15s%-10s%-10s%-10s%6.1f%8.2f\n\n",stuname,stuid,stuchinese,stumath,stuenglish,sum,avg);	 
+//		}
+//		
+//		fclose(fp);
+//		printf("-------------------------------------------\n\n") ;
+//		printf("使用删除功能请按“1”\n退出系统请按“0”\n"); 
+//		scanf("%d",&flag);	
+//		if(flag==0)
+//		{   
+////			system("cls");
+//			menu();
+//					
+//		} 
+//		
+//		else if(flag=1)
+//		{
+//			deldate();
+//			
+//		}
+//		
+//	}
+
+//
+//void adbook()
+//{  
+// 	char bookname[20];//书名 
+// 	char bookcbs[20];//出版社 
+// 	char bookid[20];//书籍编号
+//	char zuozhe[20];//作者 
+// 	char bookjg[20];//价格 
+// 	char booktype[20];//分类
+//	char bookremain[20];//图书余量 
+// 	int  flag;
+// 	
+// 	system("cls");
+// 	
+//	 	FILE *fp;
+//	 	if((fp=fopen("infbook.txt","a"))==NULL)// 添加的书类型的txt文件 
+//	 	{
+//	 		printf("打开错误！"); 
+//	 		system("pause");
+//	 		exit(0);
+//		}	 
+//	while(1)
+// 	{  	
+//	 	printf("请输入书名:");
+//		scanf("%s",bookname);	
+//		printf("请输入书籍作者:");
+//		scanf("%s",zuozhe);
+//		printf("请输入书籍出版社:");
+//		scanf("%s",bookcbs); 
+//		printf("请输入书籍价格:");
+//		scanf("%s",bookjg);
+//		printf("请输入书籍分类：");
+//		scanf("%s",booktype);
+//		printf("请输入书籍余量:"); 
+//		scanf("%s",bookremain);
+//		printf("请输入书籍编号:");
+//		scanf("%s",bookid);
+//		fprintf(fp,"%s %s %s %s %s %s %s\n",bookname,zuozhe,bookcbs,bookjg,booktype,bookremain,bookid);
+//		printf("书籍信息成功\n");	
+//		printf("是否继续录入：是（1)/否（0）\n");
+//		scanf("%d",&flag);
+//		if(flag==0)
+//		{   
+//			break;
+//			
+//		}
+//		
+//		
+//		
+//	}
+//	system("cls");
+//	fclose(fp);
+//}
+
+void adread()//管理员读取书籍信息 
+{	
+
+	char bookname[20];//书名 
+ 	char bookcbs[20];//出版社 
+ 	char bookid[20];//书籍编号 
+ 	char zuozhe[20];//作者 
+ 	char bookjg[20];//价格 
+ 	char booktype[20];//分类
+	char bookremain[20];//图书余量 
+ 	int flag;
+ 	
+ 	
+ 	system("cls");
+ 	FILE *fp;
+	if((fp=fopen("m.txt","r"))==NULL)
+	{
+	 	printf("打开错误！"); 
+	 	system("pause");
+	 	exit(0);
+	}   
+	//格式化输出
+	printf("%-10s %-15s %-10s %-10s %-10s %-10s %-15s\n\n","书名","作者","出版社","价格","种类","余量","图书编号");  
+
+		  
+		while(fscanf(fp,"%s %s %s %s %s %s %s\n",bookname,zuozhe,bookcbs,bookjg,booktype,bookremain,bookid)!=EOF)
+		{	
+			printf("%-10s %-15s %-10s %-10s %-10s %-10s %-15s%\n\n",bookname,zuozhe,bookcbs,bookjg,booktype,bookremain,bookid);	 
+		}
+		
+		fclose(fp);
+		printf("-------------------------------------------\n\n") ;
+		printf("使用删除功能请按“1”\n退出系统请按“0”\n"); 
+		scanf("%d",&flag);	
+		if(flag==0)
+		{   
+//			system("cls");发现没清屏再输入 
+			guanliyuanjiemian();
+					
+		} 
+		
+		else if(flag=1)
+		{
+			delbook();// 进入管理员删除书籍信息的操作 
+			
+		}
+		
+	}
+
+
+//管理员删除数据
+void delbook()
+{	system("cls"); 
+	char mbookid[20];
+	printf("请输入要删除图书编号：");
+	scanf("%s",&mbookid);
+	FILE *fp1,*fp2;
+	char bookname[20];//书名 
+ 	char bookcbs[20];//出版社 
+ 	char bookid[20];//书籍编号 
+ 	char zuozhe[20];//作者 
+ 	char bookjg[20];//价格 
+ 	char booktype[20];//分类
+	char bookremain[20];//图书余量 
+	
+	
+	if((fp1=fopen("m.txt","r"))==NULL)
+	{
+		printf("打开错误！");
+		system("pause");
+		exit(0); 
+	}
+	if((fp2=fopen("removscore.txt","a"))==NULL)
+		
+		{
+			printf("添加失败");
+			system("pause"); 
+			exit(0);
+		}
+	//向fp2中写入fp1中的内容 
+	while(fscanf(fp1,"%s %s %s %s %s %s %s\n",bookname,zuozhe,bookcbs,bookjg,booktype,bookremain,bookid)!=EOF)
+	{
+		if(strcmp(mbookid,bookid)==0)
+		{	
+			
+			continue;
+		}
+		
+		fflush(stdin);
+		fprintf(fp2,"%s %s %s %s %s %s %s\n",bookname,zuozhe,bookcbs,bookjg,booktype,bookremain,bookid);
+		fflush(stdin);
+	
+		
+		
+	}	 
+	fclose(fp1);	
+	fclose(fp2) ;
+	remove("m.txt");
+	rename("removscore.txt","m.txt");
+	printf("删除成功\n");
+	system("pause");
+	system("cls");
+	guanliyuanjiemian(); 
+	//调用菜单函数 
+		 
+} 
+
+void book()//用户查询 
+{
+	FILE*fp; 
+	char bookname[20];//书名 
+ 	char bookcbs[20];//出版社 
+ 	char bookid[20];//书籍编号 
+ 	char zuozhe[20];//作者 
+ 	char bookjg[20];//价格 
+ 	char booktype[20];//分类
+	char bookremain[20];//图书余量 
+	char mtybe[20];//记录输入的选项 
+	
+	int  mount[20];       //图书数量 
+	system("cls");	
+	if((fp=fopen("m.txt","r"))==NULL)
+		{
+			printf("文件不存在或打开失败！");
+			system("pause");
+			exit(0); 
+		}	
+		printf("请选择你要查询的图书种类。"); 
+		scanf("%s",&mtybe);
+		printf("%-10s %-15s %-10s %-10s %-10s %-10s %-15s\n\n","书名","作者","出版社","价格","种类","余量","编号"); 
+		while(fscanf(fp,"%s %s %s %s %s %s %s\n",bookname,zuozhe,bookcbs,bookjg,booktype,bookremain,bookid)!=EOF) 
+		{
+			if((strcmp(mtybe,booktype))==0)
+			{
+			printf("%-10s %-15s %-10s %-10s %-10s %-10s %-15s%\n\n",bookname,zuozhe,bookcbs,bookjg,booktype,bookremain,bookid);
+			
+			}	 
+		
+		}
+		fclose(fp);
+		system("pause");
+			
+}
+
+
+void adchange()
+{
+	FILE*fp1;
+	FILE*fp2;
+	int c; 
+	char bookname[20];//图书名
+	char anthor[20];     //作者 
+	char bookout[20];    //图书出版社
+	char price[20];
+	char kind[20] ;    //图书种类 
+	char mount[20];       //图书数量 
+	char booknumber[20];//图书编号 	
+	char fbooknumber[20];//输入的图书编号  
+	
+	system("cls");
+	if((fp1=fopen("m.txt","r"))==NULL)
+	{
+		printf("文件不存在或打开失败！");
+		system("pause");
+		exit(0); 
+	}
+	if((fp2=fopen("newbook.txt","a"))==NULL)
+	{
+		printf("文件不存在或打开失败！");
+		system("pause");
+		exit(0); 
+	}
+	
+	printf("▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆\n");
+	printf("▲-------------------欢迎进入管理员图书修改系统----------------------▲\n");
+	printf("\n                     请输入要修改的图书编号：") ; 
+	scanf("%s",&fbooknumber);
+	while(fscanf(fp1,"%s %s %s %s %s %s %s",&bookname,&anthor,&bookout,&price,&kind,&mount,&booknumber)!=EOF) 
+	{
+		if((strcmp(booknumber,fbooknumber))==0)
+		{
+		printf("\n                     请输入图书名：");
+		scanf("%s",&bookname) ;
+		printf("\n                     请输入图书作者：");
+		scanf("%s",&anthor) ;
+		printf("\n                     请输入图书出版社：");
+		scanf("%s",&bookout) ;
+		printf("\n                     请输入图书价格：");
+		scanf("%s",&price) ;
+		printf("\n                     请输入图书种类：");
+		scanf("%s",&kind) ;
+		printf("\n                     请输入图书数量：");
+		scanf("%s",&mount) ;
+		printf("\n                     请输入图书编号：");
+		scanf("%s",&booknumber);
+		}
+		
+		fprintf(fp2,"%s %s %s %s %s %s %s\n",bookname,anthor,bookout,price,kind,mount,booknumber);
+	}
+		
+			printf("\n                     修改成功！");
+		
+	
+        
+system("pause") ;
+fclose(fp1);
+fclose(fp2);
+remove("m.txt");
+rename("newbook.txt","m.txt");
+printf("\n                    请选择：1.继续修改  0.返回主界面 =》 ");
+	scanf("%d",&c);
+	if(c==1)
+adchange(); 
+}
+
+//关键字查询 
+void lookf()
+{	
+	FILE*fp;
+	char waitf[20];	 
+	char bookname[20];//书名 
+ 	char bookcbs[20];//出版社 
+ 	char bookid[20];//书籍编号 
+ 	char zuozhe[20];//作者 
+ 	char bookjg[20];//价格 
+ 	char booktype[20];//分类
+	char bookremain[20];//图书余量
+	system("cls");	
+	if((fp=fopen("m.txt","r"))==NULL)
+		{
+			printf("文件不存在或打开失败！");
+			system("pause");
+			exit(0); 
+		}	
+		printf("请选择你要查询的书籍关键字：");  
+		scanf("%s",&waitf);
+	printf("%-10s %-15s %-10s %-10s %-10s %-10s %-15s\n\n","书名","作者","出版社","价格","种类","余量","编号"); 
+	while(fscanf(fp,"%s %s %s %s %s %s %s\n",bookname,zuozhe,bookcbs,bookjg,booktype,bookremain,bookid)!=EOF) 
+	{
+		if((strstr(waitf,bookname))!=NULL)
+		{
+		printf("%-10s %-15s %-10s %-10s %-10s %-10s %-15s%\n\n",bookname,zuozhe,bookcbs,bookjg,booktype,bookremain,bookid);
+		
+		}
+		if((strstr(waitf,zuozhe))!=NULL)
+		{
+		printf("%-10s %-15s %-10s %-10s %-10s %-10s %-15s%\n\n",bookname,zuozhe,bookcbs,bookjg,booktype,bookremain,bookid);
+		
+		}
+		if((strstr(waitf,bookcbs))!=NULL)
+		{
+		printf("%-10s %-15s %-10s %-10s %-10s %-10s %-15s%\n\n",bookname,zuozhe,bookcbs,bookjg,booktype,bookremain,bookid);
+		
+		}
+		if((strstr(waitf,booktype))!=NULL)
+		{
+		printf("%-10s %-15s %-10s %-10s %-10s %-10s %-15s%\n\n",bookname,zuozhe,bookcbs,bookjg,booktype,bookremain,bookid);
+		
+		}
+		if((strstr(waitf,booktype))!=NULL)
+		{
+		printf("%-10s %-15s %-10s %-10s %-10s %-10s %-15s%\n\n",bookname,zuozhe,bookcbs,bookjg,booktype,bookremain,bookid);
+		
+		}
+	
+	}
+	fclose(fp);
+	system("pause");
+
+
+	
+	
+	 
+} 
+
+void guanliyuanjiemian()
+{
+	int a;
+	while(1)
+		{	
+			system("cls");
+	 	 	printf("\t\t\t|—————————————欢迎来到管理员界面—————————————|\n");
+	 	 	printf("\t\t\t|                                                                      |\n");
+	 	 	printf("\t\t\t|                                                                      |\n");
+	 	 	printf("\t\t\t|                                                                      |\n");
+	 	 	printf("\t\t\t|                                                                      |\n");
+	 	 	printf("\t\t\t|              ——————                  ——————              |\n");
+	 	 	printf("\t\t\t|             | 1.查询书籍|                 | 2.添加书籍|              |\n");
+	 	 	printf("\t\t\t|             |           |                 |           |              |\n");
+	 	 	printf("\t\t\t|              ——————                  ——————              |\n");
+	 	 	printf("\t\t\t|                                                                      |\n");
+	 	 	printf("\t\t\t|                                                                      |\n");
+	 	 	printf("\t\t\t|              ——————                  ——————              |\n");
+	 	 	printf("\t\t\t|             | 3.修改书籍|                 |4.删除书籍 |              |\n");
+	 	 	printf("\t\t\t|             |           |                 |           |              |\n");
+	 	 	printf("\t\t\t|              ——————                  ——————              |\n");
+	 	 	printf("\t\t\t|                                                                      |\n");
+	 	 	printf("\t\t\t|                                                                      |\n");
+	 	 	printf("\t\t\t|                                                                      |\n");
+	 	 	printf("\t\t\t|                                                                      |\n");
+	 	 	printf("\t\t\t|———————————————————————————————————|\n");
+	 	 	printf("\t\t\t\t\t\t  请输入进行的操作");
+			scanf("%d",&a); 
+	 	 	switch(a)
+			{
+			 case 1:book();break;
+			 case 2:adadd();break;
+			 case 3:adchange();break;
+			 case 4:delbook();break;	 	
+			} 
+ 	 	}	
+ 	 }
+ 	 
+ 	 
+ 	 
+ void adadd()
+{  
+ 	char bookname[20];//图书名
+	char anthor[20];     //作者 
+	char bookout[20];    //图书出版社
+	char price[20];
+	char kind[20] ;    //图书种类 
+	char mount[20];       //图书数量 
+	char booknumber[20];//图书编号 	
+	int flag;
+ 	
+ 	system("cls");
+ 	
+	 	FILE *fp;
+	 	if((fp=fopen("m.txt","a"))==NULL)
+	 	{
+	 		printf("打开错误！"); 
+	 		system("pause");
+	 		exit(0);
+		}	 
+	while(1)
+ 	{  	
+	 	printf("请输入书名:");
+		scanf("%s",bookname);
+		printf("请输入作者:");
+		scanf("%s",anthor); 
+		printf("请输入出版社:");
+		scanf("%s",bookout); 
+		printf("请输入价格:");
+		scanf("%s",price);
+		printf("请输入种类：");
+		scanf("%s",kind);
+		printf("请输入图书数量：") ;
+		scanf("%s",mount) ;
+		printf("请输入图书编号：");
+		scanf("%s",booknumber); 
+		fprintf(fp,"%s %s %s %s %s %s %s\n",bookname,anthor,bookout,price,kind,mount,booknumber);
+		printf("增加成功");	
+		printf("是否继续录入：是（1)/否（0）");
+		scanf("%d",&flag);
+		if(flag==0)
+		{   
+			break;
+			
+		}
+		
+		
+		
+	}
+	system("cls");
+	fclose(fp);
+}
